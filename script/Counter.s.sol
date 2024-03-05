@@ -17,6 +17,7 @@ contract CounterScript is Script {
     function setUp() public {}
 
     function run() public {
+        // This is the contract that was deployed in the script above.
         address sender = 0x5b73C5498c1E3b4dbA84de0F1833c4a029d90519;
         require(sender.code.length > 0, "Sender must be a contract");
         vm.startBroadcast(sender);
@@ -24,6 +25,6 @@ contract CounterScript is Script {
         Counter ct = new Counter();
         require(2 == vm.getNonce(sender), "Nonce should be 2 pre-call");
         ct.increment();
-        require(2 == vm.getNonce(sender), "Nonce should be 2 post-call");
+        require(2 == vm.getNonce(sender), "Nonce should be still 2 post-call");
     }
 }
